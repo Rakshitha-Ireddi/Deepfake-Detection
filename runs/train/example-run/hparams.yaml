@@ -1,0 +1,85 @@
+backbone: openai/clip-vit-large-patch14
+batch_size: 16
+betas:
+- 0.9
+- 0.999
+binary_labels: true
+checkpoint: null
+checkpoint_for_testing: best_mAP
+detect_anomaly: false
+deterministic: null
+devices: 1
+fast_dev_run: false
+freeze_feature_extractor: true
+head: LinearNorm
+limit_test_batches: null
+limit_train_batches: null
+limit_trn_files: null
+limit_tst_files: null
+limit_val_batches: 128
+limit_val_files: 16384
+loss:
+  alignment_labels: 0.0
+  bce_labels: 0.0
+  ce_labels: 1.0
+  label_smoothing: 0.0
+  uniformity: 0.0
+lr: 8.0e-05
+lr_scheduler: cosine
+make_binary_before_video_aggregation: true
+max_epochs: 10
+min_lr: 5.0e-05
+mini_batch_size: 16
+normalize_features: false
+num_classes: 2
+num_workers: 0
+overfit_batches: 0.0
+peft:
+  enabled: true
+  ln_tuning:
+    enabled: true
+    target_modules:
+    - pre_layrnorm
+    - layer_norm1
+    - layer_norm2
+    - post_layernorm
+    - layernorm
+  lora:
+    alpha: 32
+    bias: none
+    dropout: 0.1
+    enabled: false
+    rank: 1
+    target_modules:
+    - out_proj
+    use_dora: false
+    use_rslora: false
+precision: 32-true
+proj_feat_dim: 128
+run_dir: runs/train
+run_name: example-run
+seed: 42
+slerp_feature_augmentation: true
+slerp_feature_augmentation_range:
+- 0.0
+- 1.0
+throw_exception_if_run_exists: false
+trn_files:
+- config/datasets/FF/test/DF.txt
+- config/datasets/FF/test/F2F.txt
+- config/datasets/FF/test/FS.txt
+- config/datasets/FF/test/NT.txt
+- config/datasets/FF/test/real.txt
+tst_files:
+  CDF:
+  - config/datasets/CDFv2/test/Celeb-synthesis.txt
+  - config/datasets/CDFv2/test/Celeb-real.txt
+  - config/datasets/CDFv2/test/YouTube-real.txt
+unfreeze_layers: []
+val_files:
+- config/datasets/CDFv2/test/Celeb-synthesis.txt
+- config/datasets/CDFv2/test/Celeb-real.txt
+- config/datasets/CDFv2/test/YouTube-real.txt
+wandb: false
+wandb_tags: []
+weight_decay: 0.0
